@@ -10,7 +10,8 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Assignment, Phone, PhoneDisabled } from "@material-ui/icons";
-import { SocketContext } from "../SocketContext";
+
+import { SocketContext } from "../Context";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Sidebar({ children }) {
+const Sidebar = ({ children }) => {
   const { me, callAccepted, name, setName, callEnded, leaveCall, callUser } = useContext(SocketContext);
   const [idToCall, setIdToCall] = useState("");
   const classes = useStyles();
@@ -61,17 +62,16 @@ function Sidebar({ children }) {
                 label="Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                fullwidth
+                fullWidth
               />
               <CopyToClipboard text={me} className={classes.margin}>
                 <Button
                   variant="contained"
                   color="primary"
-                  fullwidth
                   startIcon={<Assignment fontSize="large" />}
+                  fullWidth
                 >
-                  {" "}
-                  Copy your ID{" "}
+                  Copy your ID
                 </Button>
               </CopyToClipboard>
             </Grid>
@@ -84,15 +84,16 @@ function Sidebar({ children }) {
                 label="ID to Call"
                 value={idToCall}
                 onChange={(e) => setIdToCall(e.target.value)}
+                fullWidth
               />
               {callAccepted && !callEnded ? (
                 <Button
                   variant="contained"
                   color="primary"
-                  fullwidth
                   startIcon={<PhoneDisabled fontSize="large" />}
                   onClick={leaveCall}
                   className={classes.margin}
+                  fullWidth
                 >
                   Hang Up
                 </Button>
@@ -100,10 +101,10 @@ function Sidebar({ children }) {
                 <Button
                   variant="contained"
                   color="primary"
-                  fullwidth
                   startIcon={<Phone fontSize="large" />}
                   onClick={() => callUser(idToCall)}
                   className={classes.margin}
+                  fullWidth
                 >
                   Call
                 </Button>
