@@ -35,7 +35,7 @@ function VideoPlayer() {
       {stream && (
         <Paper classes={classes.paper}>
           <Grid item xs={12} md={6}>
-            <Typography variant="h5" gutterBottom>
+            <Typography variant="h5" gutterBottom textAlign="center">
               {name || "You"}
             </Typography>
             <video
@@ -52,10 +52,16 @@ function VideoPlayer() {
       {callAccepted && !callEnded && (
         <Paper classes={classes.paper}>
           <Grid item xs={12} md={6}>
-            <Typography variant="h5" gutterBottom>
+            <Typography variant="h5" gutterBottom textAlign="center">
               {call.name || "Person 2"}
             </Typography>
-            <video playsInline ref={userVideo} autoPlay className={classes.video} />
+            <video
+              playsInline
+              muted
+              ref={userVideo}
+              autoPlay
+              className={classes.video}
+            />
           </Grid>
         </Paper>
       )}

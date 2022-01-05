@@ -9,9 +9,9 @@ import Notifications from "./components/Notificatons";
 const useStyles = makeStyles((theme) => ({
   appBar: {
     borderRadius: 15,
-    margin: "30px 100px",
+    margin: "10px 100px",
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     width: "600px",
@@ -39,13 +39,13 @@ const App = () => {
     <div className={classes.wrapper}>
       <AppBar className={classes.appBar} position="static" color="inherit">
         <Typography variant="h2" align="center">
-          Video Chat
+          Video Call 
         </Typography>
-      </AppBar>
-      <VideoPlayer />
-      <Sidebar>
         <Notifications />
-      </Sidebar>
+      </AppBar>
+        
+      <VideoPlayer />
+      <Sidebar></Sidebar>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Button,
   TextField,
@@ -7,9 +7,9 @@ import {
   Container,
   Paper,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Assignment, Phone, PhoneDisabled } from "@material-ui/icons";
+import { makeStyles } from "@material-ui/core/styles";
 
 import { SocketContext } from "../Context";
 
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     width: "600px",
-    margin: "35px 0",
+    margin: "10px 0",
     padding: 0,
     [theme.breakpoints.down("xs")]: {
       width: "80%",
@@ -44,18 +44,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Sidebar = ({ children }) => {
-  const { me, callAccepted, name, setName, callEnded, leaveCall, callUser } = useContext(SocketContext);
+const Sidebar = () => {
+  const { me, callAccepted, name, setName, callEnded, leaveCall, callUser } =
+    useContext(SocketContext);
   const [idToCall, setIdToCall] = useState("");
   const classes = useStyles();
 
   return (
     <Container className={classes.container}>
-      <Paper elevation={10} classes={classes.paper}>
+      <Paper elevation={10} className={classes.paper}>
         <form className={classes.root} noValidate autoComplete="off">
           <Grid container className={classes.gridContainer}>
             <Grid item xs={12} md={6} className={classes.padding}>
-              <Typography variant="h6" gutterBottom>
+              <Typography gutterBottom variant="h6">
                 Account Info
               </Typography>
               <TextField
@@ -68,20 +69,19 @@ const Sidebar = ({ children }) => {
                 <Button
                   variant="contained"
                   color="primary"
-                  startIcon={<Assignment fontSize="large" />}
                   fullWidth
+                  startIcon={<Assignment fontSize="large" />}
                 >
-                  Copy your ID
+                  Copy Your ID
                 </Button>
               </CopyToClipboard>
             </Grid>
-
             <Grid item xs={12} md={6} className={classes.padding}>
-              <Typography variant="h6" gutterBottom>
-                Make A Call
+              <Typography gutterBottom variant="h6">
+                Make a call
               </Typography>
               <TextField
-                label="ID to Call"
+                label="ID to call"
                 value={idToCall}
                 onChange={(e) => setIdToCall(e.target.value)}
                 fullWidth
@@ -89,11 +89,11 @@ const Sidebar = ({ children }) => {
               {callAccepted && !callEnded ? (
                 <Button
                   variant="contained"
-                  color="primary"
+                  color="secondary"
                   startIcon={<PhoneDisabled fontSize="large" />}
+                  fullWidth
                   onClick={leaveCall}
                   className={classes.margin}
-                  fullWidth
                 >
                   Hang Up
                 </Button>
@@ -102,9 +102,9 @@ const Sidebar = ({ children }) => {
                   variant="contained"
                   color="primary"
                   startIcon={<Phone fontSize="large" />}
+                  fullWidth
                   onClick={() => callUser(idToCall)}
                   className={classes.margin}
-                  fullWidth
                 >
                   Call
                 </Button>
@@ -112,10 +112,10 @@ const Sidebar = ({ children }) => {
             </Grid>
           </Grid>
         </form>
-        {children}
+
       </Paper>
     </Container>
   );
-}
+};
 
 export default Sidebar;

@@ -22,7 +22,7 @@ io.on("connection", (socket) => {
   socket.emit("me", socket.id);
 
   socket.on("disconnet", () => {
-    socket.broadcast.emit("Call Ended");
+    socket.broadcast.emit("callEnded");
   });
 
   socket.on("callUser", ({ userToCall, signalData, from, name }) => {
@@ -30,7 +30,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("answerCall", (data) => {
-    io.to(data.to).emit("Call accepted", data.signal);
+    io.to(data.to).emit("callAccepted", data.signal);
   });
 });
 
